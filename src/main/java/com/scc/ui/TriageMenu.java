@@ -44,7 +44,7 @@ public class TriageMenu {
     }
 
     private void comingSoon(String feature) {
-        System.out.println("\n[" + feature + "] - coming soon.");
+        System.out.println("\n[" + feature + "] coming soon.");
         InputHelper.pause();
     }
 }
