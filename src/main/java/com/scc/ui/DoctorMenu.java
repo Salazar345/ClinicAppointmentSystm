@@ -1,14 +1,26 @@
 package com.scc.ui;
 
+import com.scc.dao.UserDao;
 import com.scc.model.User;
 
-/** DOCTOR MENU (menu only for now - CRUD will be added later). */
+import java.util.Scanner;
+
 public class DoctorMenu {
 
-    public void show(User user) {
+    private final UserDao userdao;
+    private final Scanner sc;
+
+    public DoctorMenu(UserDao userDao, Scanner sc){
+        this.userdao = userDao;
+        this.sc = sc;
+    }
+
+    public void show(User doctor) {
         while (true) {
-            System.out.println("\n=========== DOCTOR MENU ===========");
-            System.out.println("Logged in as: " + user.username() + " (" + user.role() + ")");
+            System.out.println("\n=====================================");
+            System.out.println("            DOCTOR MENU ");
+            System.out.println(" User : " + doctor.username());
+            System.out.println("=====================================");
             System.out.println("  1. View My Appointment Schedule");
             System.out.println("  2. View Assigned Patient Details");
             System.out.println("  3. Update Appointment Status");
@@ -21,7 +33,7 @@ public class DoctorMenu {
                 case 3 -> comingSoon("Update Appointment Status");
                 case 4 -> {
                     if (InputHelper.confirm("Are you sure you want to logout?")) {
-                        System.out.println("Goodbye, " + user.username() + "! You are logged out.");
+                        System.out.println("Goodbye, " + doctor.username() + "! You are logged out.");
                         return;   // back to the main menu
                     }
                 }

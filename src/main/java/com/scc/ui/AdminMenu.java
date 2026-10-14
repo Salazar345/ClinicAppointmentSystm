@@ -1,15 +1,27 @@
 package com.scc.ui;
 
+import com.scc.dao.UserDao;
 import com.scc.model.User;
 
-/** ADMIN MENU (menu only for now - CRUD will be added later). */
+import java.util.Scanner;
+
 public class AdminMenu {
+
+    private final UserDao userDao;
+    private final Scanner sc;
+
+    public AdminMenu(UserDao userDao, Scanner sc){
+        this.userDao = userDao;
+        this.sc = sc;
+    }
 
     public void show(User user) {
         while (true) {
-            System.out.println("\n=========== ADMIN MENU ===========");
-            System.out.println("Logged in as: " + user.username() + " (" + user.role() + ")");
-            System.out.println("  1. Manage User Accounts (approve / deactivate)");
+            System.out.println("\n=====================================");
+            System.out.println("             ADMIN MENU ");
+            System.out.println(" User: " + user.full_name());
+            System.out.println("======================================");
+            System.out.println("  1. Manage User Accounts ");
             System.out.println("  2. Manage Doctor Records");
             System.out.println("  3. View All Patients and Appointments");
             System.out.println("  4. View Reports");
@@ -26,7 +38,7 @@ public class AdminMenu {
                 case 6 -> {
                     if (InputHelper.confirm("Are you sure you want to logout?")) {
                         System.out.println("Goodbye, " + user.username() + "! You are logged out.");
-                        return;   // back to the main menu
+                        return;
                     }
                 }
             }

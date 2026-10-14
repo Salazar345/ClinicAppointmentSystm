@@ -2,10 +2,6 @@ package com.scc.ui;
 
 import java.util.Scanner;
 
-/**
- * Shared, error-tolerant keyboard input. Every method keeps asking until the
- * user gives a valid answer, so typos never crash the program.
- */
 public final class InputHelper {
 
     private static final Scanner SC = new Scanner(System.in);
@@ -13,7 +9,7 @@ public final class InputHelper {
     private InputHelper() {
     }
 
-    /** Reads a non-empty line (extra spaces are trimmed). */
+
     public static String readText(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -29,7 +25,7 @@ public final class InputHelper {
         }
     }
 
-    /** Reads a whole number between min and max (inclusive). */
+
     public static int readChoice(String prompt, int min, int max) {
         while (true) {
             String line = readText(prompt);
@@ -45,7 +41,6 @@ public final class InputHelper {
         }
     }
 
-    /** Yes/No question. Accepts y, yes, n, no in any letter case. */
     public static boolean confirm(String prompt) {
         while (true) {
             String a = readText(prompt + " (y/n): ").toLowerCase();

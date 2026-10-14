@@ -20,7 +20,7 @@ public class Main{
 
             System.out.println("\n========================================");
             System.out.println("      CLINIC APPOINTMENT SYSTEM");
-            System.out.println("\n========================================");
+            System.out.println("========================================");
             System.out.println("[1] Login");
             System.out.println("[2] Register");
             System.out.println("[3] Exit");
@@ -70,17 +70,14 @@ public class Main{
 
         User loggedIn = userDao.login(user,pass);
 
-        if(loggedIn == null){
-            System.out.println("\nInvalid username or password! Try again.");
-        }else if(!loggedIn.active().equals("ACTIVE")){
-            return;
-        }else {
+        if(loggedIn != null){
             System.out.println("\nSuccessfully Login");
+            System.out.println("\n -> Welcome "+loggedIn.full_name()+" | ROLE: "+loggedIn.role()+"");
             switch (loggedIn.role()){
-                case "ADMIN"        -> new AdminMenu().show(loggedIn);
-                case "DOCTOR"       -> new DoctorMenu().show(loggedIn);
-                case "RECEPTIONIST" -> new ReceptionistMenu().show(loggedIn);
-                case "TRIAGE"       -> new TriageMenu().show(loggedIn);
+                case "ADMIN"        -> new AdminMenu(userDao, sc).show(loggedIn);
+                case "DOCTOR"       -> new DoctorMenu(userDao, sc).show(loggedIn);
+                case "RECEPTIONIST" -> new ReceptionistMenu(userDao, sc).show(loggedIn);
+                case "TRIAGE"       -> new TriageMenu(userDao, sc).show(loggedIn);
                 default             -> System.out.println("Unknown role: " + loggedIn.role());
             }
         }

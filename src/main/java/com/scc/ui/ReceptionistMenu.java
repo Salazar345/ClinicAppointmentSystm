@@ -1,14 +1,27 @@
 package com.scc.ui;
 
+import com.scc.dao.UserDao;
 import com.scc.model.User;
 
-/** RECEPTIONIST MENU (menu only for now - CRUD will be added later). */
+import java.util.Scanner;
+
+
 public class ReceptionistMenu {
 
-    public void show(User user) {
+    private final UserDao userDao;
+    private final Scanner sc;
+
+    public ReceptionistMenu(UserDao userDao, Scanner sc){
+        this.userDao = userDao;
+        this.sc = sc;
+    }
+
+    public void show(User receptionist) {
         while (true) {
-            System.out.println("\n=========== RECEPTIONIST MENU ===========");
-            System.out.println("Logged in as: " + user.username() + " (" + user.role() + ")");
+            System.out.println("\n=====================================");
+            System.out.println("            RECEPTIONIST MENU ");
+            System.out.println("User: " + receptionist.username());
+            System.out.println("=====================================");
             System.out.println("  1. Register / Edit Patient");
             System.out.println("  2. Search Patients");
             System.out.println("  3. Book Appointment");
@@ -27,8 +40,8 @@ public class ReceptionistMenu {
                 case 6 -> comingSoon("View Daily Schedule");
                 case 7 -> {
                     if (InputHelper.confirm("Are you sure you want to logout?")) {
-                        System.out.println("Goodbye, " + user.username() + "! You are logged out.");
-                        return;   // back to the main menu
+                        System.out.println("Goodbye, " + receptionist.username() + "! You are logged out.");
+                        return;
                     }
                 }
             }
